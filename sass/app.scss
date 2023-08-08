@@ -2,3 +2,12 @@
     display: flex;
     justify-content: space-between;
 }
+
+.contributors{
+    display: flex;
+    justify-content: space-around;
+    img{
+        height: 200px;
+        display: block;
+    }
+}
