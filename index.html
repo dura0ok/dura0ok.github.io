@@ -58,13 +58,13 @@
             <figure>
                 <img src="images/vit.jpg" alt="">
                 <figcaption class="white">
-                    Vitaly Davydov
+                    Vitaly Davydov(Postgres Pro)
                 </figcaption>
             </figure>
             <figure>
                 <img src="images/esabol.jpeg" alt="">
                 <figcaption class="white">
-                    Ed Sabol
+                    Ed Sabol(Nasa)
                 </figcaption>
             </figure>
         </div>
@@ -78,27 +78,35 @@
         <img src="images/thumbnail_l.jpeg" alt="" class="cover">
     </section>
     <section class="slide">
-        <h1>Задача #1: Центр Масс</h1>
-        <p>В чем суть задачи:<br>
-            Тяжело работать с рассеянным скоплением звезд(например)<br>
-            удобней работать с одной звездой, поэтому полезно реализовать центр масс</p>
+        <figure>
+            <img class="place centroid" src="images/centroid-qr.svg" alt="Wide picture placeholder.">
+            <figcaption class="white">
+                Ссылка на пулл реквест
+            </figcaption>
+        </figure>
     </section>
     <section class="slide">
-        <h1>Задача #1: Центр Масс.</h1>
+        <h1>Задача #1: Центр масс</h1>
+        <p>В чем суть задачи:<br>
+            Тяжело работать с рассеянным скоплением звезд(например)<br>
+            удобней работать с одной звездой, поэтому, полезно реализовать центр масс</p>
+    </section>
+    <section class="slide">
+        <h1>Задача #1: Центр масс.</h1>
         <h2>Коротко о идеи реализации</h2>
         <h3>Формула центра масс для системы материальных точек</h3>
         <img src="images/gravity-wiki.png" alt="">
     </section>
     <section class="slide">
-        <h1>Задача #1: Центр Масс.</h1>
+        <h1>Задача #1: Центр масс.</h1>
         <h2>С чем столкнулся?</h2>
         <ul>
-            <li>Проблема проецирования (0,0,0) на сферу</li>
+            <li>Проблема проецирования (0, 0, 0) на сферу</li>
             <li>Нужно ли делать центр масс через теорему Стокса для полигонов?</li>
         </ul>
     </section>
     <section class="slide">
-        <h1>Проблема проецирования (0,0,0) на сферу</h1>
+        <h1>Проблема проецирования (0, 0, 0) на сферу</h1>
         <img src="images/GCS.jpg" alt="">
     </section>
     <section class="slide">
@@ -114,7 +122,7 @@
 (1 row)</code></pre>
     </section>
     <section class="slide">
-        <h1>Задача #1: Центр Масс.</h1>
+        <h1>Задача #1: Центр масс.</h1>
         <h2>Как это работает?</h2>
         <pre><code style="line-height: normal;">SELECT center(ARRAY[
     spoint(0, 10),
