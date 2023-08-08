@@ -15,3 +15,8 @@
 .centroid {
   height: 300px;
 }
+
+#task2-issue {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
