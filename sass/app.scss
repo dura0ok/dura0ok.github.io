@@ -17,9 +17,8 @@
 }
 
 .issue-img-wrapper{
-    display: flex;
-    flex-direction: column;
     img{
+        display: block;
         max-height: 100%;
         width: 100%;
         object-fit: contain;
