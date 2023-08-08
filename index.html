@@ -2,11 +2,12 @@
 <html lang="en">
 
 <head>
-    <title>Shower Presentation Engine</title>
+    <title>Дурачок Глупый</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="shower/themes/material/styles/styles.css">
     <link rel="stylesheet" href="dist/app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
     .shower {
         --slide-ratio: calc(16 / 9);
@@ -28,13 +29,88 @@
         </div>
     </header>
     <section class="slide">
-        <h1>asdasd</h1>
+        <h2 class="shout grow">О pgsphere
+            <i class="fa-solid fa-globe"></i>
+        </h2>
     </section>
     <section class="slide">
-        <h1>123</h1>
+        <h1>Что такое pgsphere?</h1>
+        <h2>pgsphere - это расширение для работы с сферической геометрией.</h2>
+        <p>Кому это нужно? Например астрономам.</p>
     </section>
     <section class="slide">
-        <h1>asda54234234sd</h1>
+        <h1>Почему развивать важно? Почему выбирают?</h1>
+        <ul>
+            <li>Индексация обьектов через R-Tree</li>
+            <li>Описание фигур на небесной сфере(границы созвездий например)</li>
+            <li>Преобразования на сфере</li>
+        </ul>
+        <p>Много кто пользуется, большой спрос, поэтому важно исправлять ошибки и добавлять новые фичи</p>
+    </section>
+    <section class="slide">
+        <h2 class="shout grow">Мои задачи
+            <i class="fa-solid fa-list-check"></i>
+        </h2>
+    </section>
+    <section class="slide">
+        <h1>Задача #1: Центр Масс</h1>
+        <p>В чем суть задачи:<br>
+            Тяжело работать с рассеянным скоплением звезд(например)<br>
+            удобней работать с одной звездой, поэтому полезно реализовать центр масс</p>
+    </section>
+    <section class="slide">
+        <h1>Задача #1: Центр Масс.</h1>
+        <h2>Коротко о идеи реализации</h2>
+        <img src="images/gravity-wiki.png" alt="">
+    </section>
+    <section class="slide">
+        <h1>Задача #1: Центр Масс.</h1>
+        <h2>С чем столкнулся?</h2>
+        <ul>
+            <li>Проблема проецирования (0,0,0) на сферу</li>
+            <li>Нужно ли делать центр масс через теорему Стокса для полигонов?</li>
+        </ul>
+    </section>
+    <section class="slide">
+        <h1>Задача #1: Центр Масс.</h1>
+        <h2>Как это работает?</h2>
+        <pre><code style="line-height: normal;">SELECT @@ ARRAY[
+    spoint(40.7128, -74.0060),
+    spoint(34.0522, -118.2437),
+    spoint(37.7749, -122.4194)
+] AS center;
+                 center                 
+----------------------------------------
+ (3.04366980631979 , 0.858938068921891)
+(1 row)</code></pre>
+    </section>
+    <section class="slide">
+        <h1>Задача #1: Центр Масс.</h1>
+        <h2>Как это работает?</h2>
+        <pre><code style="line-height: normal;">SELECT center(ARRAY[
+    spoint(0, 10),
+    spoint(0, -10),
+]);
+                 center                 
+----------------------------------------
+                (0 , 0)
+(1 row)</code></pre>
+    </section>
+    <section class="slide">
+        <h2>Как реализовал?</h2>
+        <pre><code style="line-height: normal;">
+    for (i = 0; i < num_elements; i++)
+    {
+        spoint_vector3d(&v, &array_data[i]);
+        point_coords.x += v.x;
+        point_coords.y += v.y;
+        point_coords.z += v.z;
+    }
+
+    point_coords.x /= num_elements;
+    point_coords.y /= num_elements;
+    point_coords.z /= num_elements;
+        </code></pre>
     </section>
     <footer class="badge">
         <a href="https://github.com/shower/shower">Fork me on GitHub</a>
