@@ -71,7 +71,7 @@
     </section>
     <section class="slide">
         <h2 class="shout grow">Мои задачи
-            <i class="fa-solid fa-list-check"></i>
+            <i class="fa-solid fa-rectangle-list"></i>
         </h2>
     </section>
     <section class="slide">
@@ -153,15 +153,208 @@
         </code></pre>
     </section>
     <!-- Вторая задача -->
-     <section class="slide">
-        <h1>Задача #2: Неверное поведение функции strans</h1>
+    <section class="slide">
         <div class="issue-img-wrapper">
-            <img src="images/task2-issue.png" alt="" id="task2-issue">
+            <figure>
+                <figcaption class="white">
+                    Задача #2. Неверное поведение функции strans
+                </figcaption>
+                <img src="images/task2-issue.png" id="task2-issue">
+            </figure>
         </div>
     </section>
-    <footer class="badge">
-        <a href="https://github.com/shower/shower">Fork me on GitHub</a>
-    </footer>
+    <section class="slide">
+        <h2>Задача #2. <br>Неверное поведение функции strans</h2>
+        <h3>С какими сложностями столкнулся?</h3>
+        <ul>
+            <li>Что такое углы эйлера и зачем они нужны?</li>
+            <li>Как отлаживать с помощью gdb расширение?</li>
+        </ul>
+    </section>
+    <section class="slide">
+        <img class="place left" src="images/task2-docs.png" alt="">
+    </section>
+    <section class="slide">
+        <figcaption class="white">
+            Пример того что должна была возвращать функция
+        </figcaption>
+        <img src="images/task2-theta-ex.png" alt="">
+    </section>
+    <section class="slide">
+        <figcaption class="white place top">
+            <h1>GDB</h1>
+        </figcaption>
+        <img class="place left" src="images/gdb-logo.png" alt="">
+    </section>
+    <div class="slide">
+        <pre><code>typedef struct
+{
+    unsigned char   phi_a:2,    /* first axis */
+                    theta_a:2,  /* second axis */
+                    psi_a:2;    /* third axis */
+    float8          phi,        /* first rotation angle */
+                    theta,      /* second rotation angle */
+                    psi;        /* third rotation angle */
+} SEuler;</code></pre>
+    </div>
+    <div class="slide">
+        <figcaption class="white">
+            <h2>Как удалось решить?</h2>
+        </figcaption>
+        <img class="cover" src="images/task2-howto-solved.png" alt="">
+    </div>
+    <!-- Задача 3 -->
+    <section class="slide">
+        <div class="issue-img-wrapper">
+            <figure>
+                <figcaption class="white">
+                    Задача #3. Конструкторы _deg
+                </figcaption>
+                <img class="cover" src="images/task3-issue.png" height="50%">
+            </figure>
+        </div>
+    </section>
+    <section class="slide">
+        <h1>Задача #3 Конструкторы _deg</h1>
+        <h3>Что я увидел в Pull Request 5 летней давности?</h3>
+        <ul>
+            <li>Человек сломал форматирование и не стал его чинить</li>
+            <li>Код тяжело просто влить, потому что он просто устарел</li>
+        </ul>
+        <h4>Решено было просто взять за основу его идеи api и сделать с нуля.</h4>
+    </section>
+    <section class="slide">
+        <h1>Задача #3 Конструкторы _deg</h1>
+        <h2>Что было сделано?</h2>
+        <ul>
+            <li>Конструктор spoint_deg(deg, deg)</li>
+            <li>Конструктор scircle_deg(spoint, deg) - второй аргумент теперь в градусах</li>
+            <li>spoly_deg(float8[])</li>
+        </ul>
+    </section>
+    <section class="slide">
+        <h1>Задача #3 Конструкторы _deg</h1>
+        <h2>Как это работает?</h2>
+        <pre><code>SELECT spoint_deg(57.2958, 57.2958);
+      spoint_deg       
+-----------------------
+ (57.2958d , 57.2958d)
+(1 row)</code></pre>
+    </section>
+    <section class="slide">
+        <h1>Задача #3 Конструкторы _deg</h1>
+        <h2>Как это работает?</h2>
+        <pre><code>SELECT scircle_deg(spoint(10,10), 90);
+               scircle_deg                
+------------------------------------------
+ <(0.57522204 , -0.57522204) , 1.5707963>
+(1 row)</code></pre>
+    </section>
+    <section class="slide">
+        <h1>Задача #3 Конструкторы _deg</h1>
+        <h2>Как это работает?</h2>
+        <pre><code>SELECT spoly_deg(ARRAY[10.0, 0.0, 10.0, 1.0, 15.0, 0.0]);
+             spoly_deg              
+------------------------------------
+ {(10d , 0d),(10d , 1d),(15d , 0d)}
+(1 row)</code></pre>
+    </section>
+    <section class="slide">
+        <h1>Задача #3 Конструкторы _deg</h1>
+        <h2>С какой сложностью столкнулся?</h2>
+        <p>Как переиспользовать текущие конструкторы?</p>
+    </section>
+    <div class="slide">
+        <pre><code>Datum
+spherecircle_by_center_deg(PG_FUNCTION_ARGS)
+{
+    Datum res;
+    result = <mark>DirectFunctionCall2</mark>(
+        <mark>spherecircle_by_center</mark>,
+        PointerGetDatum(p),
+        Float8GetDatum(rad)
+        );
+    PG_RETURN_DATUM(res);
+</code></pre>
+    </div>
+    <div class="slide">
+        <figcaption>
+            Issue задачи
+        </figcaption>
+        <img class="cover" src="images/task4-issue.png" alt="">
+    </div>
+    <div class="slide">
+        <h1>Задача #4 Точки из spath, spoly</h1>
+        <h2>С какой сложностью столкнулся?</h2>
+        <p>Функция construct_array принимает id типа и при перезагрузке он меняется</p>
+    </div>
+    <div class="slide">
+        <h1>Задача #4 Точки из spath, spoly</h1>
+        <h2>Сигнатура construct_array</h2>
+        <pre><code>extern ArrayType *construct_array(
+            Datum *elems, int nelems,
+            Oid elmtype,int elmlen, 
+            bool elmbyval, char elmalign);</code></pre>
+    </div>
+    <div class="slide">
+        <img src="images/ex-task4.png" id="task2-issue" style="max-height: 400px; display: block; margin: 0 auto;">
+    </div>
+    <div class="slide">
+        <h1>Задача #5<br> Поддержка Postgres 16. Фикс</h1>
+        <p>В чем суть задачи? Когда контрибьюторы делают пулл реквест - перед тем как смотреть их код прогоняется автоматическое тестирование на всех версиях постгреса от 10-15 и хотелось добавить 16ую</p>
+    </div>
+    <div class="slide">
+         <div class="issue-img-wrapper">
+            <figure>
+                <figcaption class="white">
+                    Пулл Реквест человека
+                </figcaption>
+                <img src="images/pr-task5-part1.png">
+            </figure>
+        </div>
+    </div>
+    <div class="slide">
+        <img class="cover" src="images/pr-task5-part2.png" alt="">
+    </div>
+    <div class="slide">
+         <div class="issue-img-wrapper">
+            <figure>
+                <figcaption class="white">
+                    Первое что пришло в голову
+                </figcaption>
+                <img src="images/task5-fixes.png">
+            </figure>
+            <p>В чем проблема такого решения? Магический размер буфера, поэтому в планах переписать на sprintf</p>
+        </div>
+    </div>
+    <section class="slide">
+        <h2 class="shout grow">Итоги
+            <i class="fa-solid fa-list-check"></i>
+        </h2>
+    </section>
+    <section class="slide">
+        <h2>Чему я научился?</h2>
+        <ul>
+            <li>Работа с opensource сообществом</li>
+            <li>Как работают расширения в postgres</li>
+            <li>Работа с pg indent</li>
+        </ul>
+    </section>
+    <section class="slide">
+        <h2>Ссылки на мои пулл реквесты</h2>
+        <ul>
+            <li><a href="https://github.com/postgrespro/pgsphere/pull/33">Центр масс</a></li>
+            <li><a href="https://github.com/postgrespro/pgsphere/pull/32">Неверное поведение функции strans</a></li>
+            <li><a href="https://github.com/postgrespro/pgsphere/pull/38">Конструкторы deg</a></li>
+            <li><a href="https://github.com/postgrespro/pgsphere/pull/34">Точки spoint, spath</a></li>
+            <li><a href="https://github.com/postgrespro/pgsphere/pull/41">Тесты в трэвисе</a></li>
+        </ul>
+    </section>
+    <section class="slide">
+        <h2 class="shout grow">Вопросы
+            <i class="fa-solid fa-question"></i>
+        </h2>
+    </section>
     <div class="progress"></div>
     <script src="shower/shower.js"></script>
     <!-- Copyright © 2023 Yours Truly, Famous Inc. -->
