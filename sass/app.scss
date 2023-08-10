@@ -25,7 +25,7 @@
     }
 }
 
-h1, figcaption{
+h1, h3, figcaption{
     color: #0aa7f5;
 }
 
@@ -39,4 +39,8 @@ ul{
     width: 100px;
     height: 100px;
     float: right;
+}
+
+figure{
+    margin-bottom: 100px;
 }

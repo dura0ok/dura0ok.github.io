@@ -38,7 +38,9 @@
         <h1>Что такое pgsphere?</h1>
         <h2>pgsphere - это расширение для работы с сферической геометрией.</h2>
         <p>Кому это нужно? Например, астрономам</p>
-        <p>Система управление обсерваторией(телескопы роботы) использовала pgsphere</p>
+        <blockquote>
+            <p>Система управление обсерваторией(телескопы роботы) использовала pgsphere</p>
+        </blockquote>
     </section>
     <section class="slide">
         <h1>Почему развивать важно? Почему выбирают?</h1>
@@ -54,8 +56,8 @@
             <figcaption>
                 https://habr.com/ru/companies/otus/articles/696556/
             </figcaption>
+            <img src="images/pgsphere_background.png" alt="" class="cover">
         </figure>
-        <img src="images/pgsphere_background.png" alt="" class="cover">
     </section>
     <section class="slide">
         <figure>
@@ -78,7 +80,7 @@
             <figure>
                 <img src="images/esabol.jpeg" alt="">
                 <figcaption class="white">
-                    Ed Sabol(Nasa)
+                    Ed Sabol(NASA)
                 </figcaption>
             </figure>
         </div>
@@ -95,19 +97,19 @@
         <img src="images/centroid-qr.svg" alt="Wide picture placeholder." class="qr">
         <h1>Задача #1: Центр масс</h1>
         <p>В чем суть задачи:<br>
-            Тяжело работать с рассеянным скоплением звезд(например)<br>
-            удобней работать с одной звездой, поэтому, полезно реализовать центр масс</p>
+            Тяжело работать с рассеянным скоплением звезд, например.<br>
+            Удобней работать с одной звездой, поэтому полезно реализовать центр масс</p>
     </section>
     <section class="slide">
         <img src="images/centroid-qr.svg" alt="Wide picture placeholder." class="qr">
-        <h1>Задача #1: Центр масс.</h1>
+        <h1>Задача #1: Центр масс</h1>
         <h2>Коротко об идеи реализации</h2>
-        <h3>Формула центра масс для системы материальных точек</h3>
+        <h4>Формула центра масс для системы материальных точек</h4>
         <img src="images/gravity-wiki.png" alt="">
     </section>
     <section class="slide">
         <img src="images/centroid-qr.svg" alt="Wide picture placeholder." class="qr">
-        <h1>Задача #1: Центр масс.</h1>
+        <h1>Задача #1: Центр масс</h1>
         <h2>С чем столкнулся?</h2>
         <ul>
             <li>Проблема проецирования (0, 0, 0) на сферу</li>
@@ -116,10 +118,11 @@
     </section>
     <section class="slide">
         <img src="images/centroid-qr.svg" alt="Wide picture placeholder." class="qr">
-        <h1>Проблема проецирования (0, 0, 0) на сферу</h1>
+        <h1>Проблема проецирования<br> (0, 0, 0) на сферу</h1>
         <img src="images/GCS.jpg" alt="" style="height: 50%;">
     </section>
     <section class="slide">
+        <h1>Задача #1: Центр масс</h1>
         <img src="images/centroid-qr.svg" alt="Wide picture placeholder." class="qr">
         <h2>Как это работает?</h2>
         <pre><code style="line-height: normal;">SELECT @@ ARRAY[
@@ -133,8 +136,8 @@
 (1 row)</code></pre>
     </section>
     <section class="slide">
-         <img src="images/centroid-qr.svg" alt="Wide picture placeholder." class="qr">
-        <h1>Задача #1: Центр масс.</h1>
+        <img src="images/centroid-qr.svg" alt="Wide picture placeholder." class="qr">
+        <h1>Задача #1: Центр масс</h1>
         <h2>Как это работает?</h2>
         <pre><code style="line-height: normal;">SELECT center(ARRAY[
     spoint(0, 10),
@@ -146,6 +149,7 @@
 (1 row)</code></pre>
     </section>
     <section class="slide">
+        <h1>Задача #1: Центр масс</h1>
         <img src="images/centroid-qr.svg" alt="Wide picture placeholder." class="qr">
         <h2>Как реализовал?</h2>
         <pre><code style="line-height: normal;">
@@ -176,8 +180,8 @@
     </section>
     <section class="slide">
         <img src="images/task2-qr.svg" alt="Wide picture placeholder." class="qr">
-        <h2>Задача #2. <br>Неверное поведение функции strans</h2>
-        <h3>С какими сложностями столкнулся?</h3>
+        <h1>Задача #2. <br>Неверное поведение функции strans</h1>
+        <h4>С какими сложностями столкнулся?</h4>
         <ul>
             <li>Что такое углы эйлера и зачем они нужны?</li>
             <li>Как отлаживать с помощью gdb расширение?</li>
@@ -194,12 +198,6 @@
         </figcaption>
         <img src="images/task2-theta-ex.png" alt="">
     </section>
-    <section class="slide">
-        <figcaption class="white place top">
-            <h1>GDB</h1>
-        </figcaption>
-        <img class="place left" src="images/gdb-logo.png" alt="">
-    </section>
     <div class="slide">
         <img src="images/task2-qr.svg" alt="Wide picture placeholder." class="qr">
         <pre><code>typedef struct
@@ -212,10 +210,16 @@
                     psi;        /* third rotation angle */
 } SEuler;</code></pre>
     </div>
+    <section class="slide">
+        <figcaption class="white place top">
+            <h1>GDB</h1>
+        </figcaption>
+        <img class="place left" src="images/gdb-logo.png" alt="">
+    </section>
     <div class="slide">
         <img src="images/task2-qr.svg" alt="Wide picture placeholder." class="qr">
         <figcaption class="white">
-            <h2>Как удалось решить?</h2>
+            <h3>Как удалось решить?</h3>
         </figcaption>
         <img class="cover" src="images/task2-howto-solved.png" alt="">
     </div>
@@ -237,9 +241,9 @@
         <h3>Что я увидел в Pull Request 5 летней давности?</h3>
         <ul>
             <li>Человек сломал форматирование и не стал его чинить</li>
-            <li>Код тяжело просто влить, потому что он просто устарел</li>
+            <li>Код тяжело влить, потому что он просто устарел</li>
         </ul>
-        <h4>Решено было просто взять за основу его идеи api и сделать с нуля.</h4>
+        <h4>Решено было взять за основу его идеи api и сделать с нуля.</h4>
     </section>
     <section class="slide">
         <img src="images/task3-qr.svg" alt="Wide picture placeholder." class="qr">
@@ -284,7 +288,7 @@
     <section class="slide">
         <img src="images/task3-qr.svg" alt="Wide picture placeholder." class="qr">
         <h1>Задача #3 Конструкторы _deg</h1>
-        <h2>С какой сложностью столкнулся?</h2>
+        <h2>С какой проблемой столкнулся?</h2>
         <p>Как переиспользовать текущие конструкторы?</p>
     </section>
     <div class="slide">
@@ -304,7 +308,7 @@ spherecircle_by_center_deg(PG_FUNCTION_ARGS)
     <div class="slide">
         <img src="images/task4-qr.svg" alt="Wide picture placeholder." class="qr">
         <figcaption>
-            Задача #4 Точки из spath, spoly. Issue задачи
+            <h3>Задача #4 Точки из spath, spoly. Issue задачи</h3>
         </figcaption>
         <img class="cover" src="images/task4-issue.png" alt="" style="margin-top: 5%">
     </div>
@@ -312,7 +316,7 @@ spherecircle_by_center_deg(PG_FUNCTION_ARGS)
         <img src="images/task4-qr.svg" alt="Wide picture placeholder." class="qr">
         <h1>Задача #4 Точки из spath, spoly</h1>
         <h2>С какой сложностью столкнулся?</h2>
-        <p>Функция construct_array принимает id типа и при перезагрузке он меняется</p>
+        <p>Функция construct_array принимает OID типа и при перезагрузке он меняется</p>
     </div>
     <div class="slide">
         <img src="images/task4-qr.svg" alt="Wide picture placeholder." class="qr">
@@ -320,12 +324,12 @@ spherecircle_by_center_deg(PG_FUNCTION_ARGS)
         <h2>Сигнатура construct_array</h2>
         <pre><code>extern ArrayType *construct_array(
             Datum *elems, int nelems,
-            Oid elmtype,int elmlen, 
+            <mark>Oid elmtype</mark>,int elmlen, 
             bool elmbyval, char elmalign);</code></pre>
     </div>
     <section class="slide">
         <img src="images/task4-qr.svg" alt="Wide picture placeholder." class="qr">
-        <img src="images/ex-task4.png" id="task2-issue" style="max-height: 400px; display: block; margin: 0 auto;">
+        <img src="images/ex-task4.png" id="task2-issue" style="max-height: 400px; display: block; margin: 0 auto; width: 600px;">
     </section>
     <section class="slide">
         <img class="qr" src="images/task5-qr.svg" alt="">
@@ -356,10 +360,10 @@ spherecircle_by_center_deg(PG_FUNCTION_ARGS)
                 </figcaption>
                 <img src="images/task5-fixes.png">
             </figure>
-            <p>В чем проблема такого решения? Магический размер буфера, поэтому в планах переписать на sprintf</p>
+            <p>В чем проблема такого решения? Магический размер буфера, поэтому в планах переписать на snprintf</p>
         </div>
     </section>
-    <section class="slide"> 
+    <section class="slide">
         <h2 class="shout grow">Итоги
             <i class="fa-solid fa-list-check"></i>
         </h2>
