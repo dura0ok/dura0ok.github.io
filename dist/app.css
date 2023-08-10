@@ -31,3 +31,9 @@ h1, figcaption {
 ul li a {
   text-decoration: none !important;
 }
+
+.qr {
+  width: 100px;
+  height: 100px;
+  float: right;
+}
