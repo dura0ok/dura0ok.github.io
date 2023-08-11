@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Дурачок Глупый</title>
+    <title>PGSPHERE - задачи</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="shower/themes/material/styles/styles.css">
@@ -20,8 +20,8 @@
         <div class="header_wrapper">
             <div class="header_text">
                 <h1>Летняя школа. Postgres Pro.</h1>
-                <p>PG Sphere. Решение задач в opensource.</p>
-                <p>Дурачок Глупый</p>
+                <p class="desc">PG Sphere. Решение задач в opensource.</p>
+                <p class="desc">Степан Неретин</p>
             </div>
             <div class="header_logos">
                 <img src="images/postgres-elephant-vanill.svg" alt="logo postgres">
@@ -36,10 +36,10 @@
     </section>
     <section class="slide">
         <h1>Что такое pgsphere?</h1>
-        <h2>pgsphere - это расширение для работы с сферической геометрией.</h2>
+        <h3>pgsphere - это расширение для работы с сферической геометрией.</h3>
         <p>Кому это нужно? Например, астрономам</p>
         <blockquote>
-            <p>Система управление обсерваторией(телескопы роботы) использовала pgsphere</p>
+            <p>это расширение используется астрономами по всему миру. В частности, у нас оно используется в системе управления обсерваторией, в системе управления телескопами-роботами "МАСТЕР".</p>
         </blockquote>
     </section>
     <section class="slide">
@@ -122,8 +122,8 @@
         <img src="images/GCS.jpg" alt="" style="height: 50%;">
     </section>
     <section class="slide">
-        <h1>Задача #1: Центр масс</h1>
         <img src="images/centroid-qr.svg" alt="Wide picture placeholder." class="qr">
+        <h1>Задача #1: Центр масс</h1>
         <h2>Как это работает?</h2>
         <pre><code style="line-height: normal;">SELECT @@ ARRAY[
     spoint(40.7128, -74.0060),
@@ -149,8 +149,8 @@
 (1 row)</code></pre>
     </section>
     <section class="slide">
-        <h1>Задача #1: Центр масс</h1>
         <img src="images/centroid-qr.svg" alt="Wide picture placeholder." class="qr">
+        <h1>Задача #1: Центр масс</h1>
         <h3>Как реализовал?</h3>
         <pre><code style="line-height: normal; font-size: 15px !important;">
     for (i = 0; i < num_elements; i++)
@@ -240,7 +240,7 @@
         <h1>Задача #3 Конструкторы _deg</h1>
         <h3>Что я увидел в Pull Request 5 летней давности?</h3>
         <ul>
-            <li>Человек сломал форматирование и не стал его чинить</li>
+            <li>Человек сломал codestyle во многих местах и так не починил, забросив</li>
             <li>Код тяжело влить, потому что он просто устарел</li>
         </ul>
         <h4>Решено было взять за основу его идеи api и сделать с нуля.</h4>
