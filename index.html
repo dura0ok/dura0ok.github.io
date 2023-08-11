@@ -113,7 +113,7 @@
         <h2>С чем столкнулся?</h2>
         <ul>
             <li>Проблема проецирования (0, 0, 0) на сферу</li>
-            <li>Нужно ли делать центр масс через теорему Стокса для полигонов?</li>
+            <li>Нужно ли делать центр масс через теорему <a href="https://github.com/chrisveness/geodesy/blob/8f4ef33d/latlon-nvector-spherical.js#L783">Стокса</a> для полигонов?</li>
         </ul>
     </section>
     <section class="slide">
@@ -360,7 +360,7 @@ spherecircle_by_center_deg(PG_FUNCTION_ARGS)
                 </figcaption>
                 <img src="images/task5-fixes.png">
             </figure>
-            <p>В чем проблема такого решения? Магический размер буфера, поэтому в планах переписать на snprintf</p>
+            <p>В чем проблема такого решения? Магический размер буфера, поэтому в планах переписать на <a href="https://github.com/postgrespro/pgsphere/pull/41#issuecomment-1668969511">snprintf</a></p>
         </div>
     </section>
     <section class="slide">
@@ -375,7 +375,8 @@ spherecircle_by_center_deg(PG_FUNCTION_ARGS)
             <li>Как работают расширения в postgres</li>
             <li>Работа с pg indent</li>
             <li>Работа с travis</li>
-            <li>Симуляция travis pipeline в Docker</li>
+            <li><a href="https://pastebin.com/z2rqD0Aq">Сборка своего Docker Image для тестов</a></li>
+            <li><a href="https://pastebin.com/f68evYea">Симуляция travis pipeline в Docker</a></li>
         </ul>
     </section>
     <section class="slide">
